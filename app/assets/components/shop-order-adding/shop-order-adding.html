@@ -1,0 +1,49 @@
+<dom-module id="shop-order-adding">
+  <link rel="stylesheet" href="shop-order-adding.css" />
+
+  <template>
+
+    <iron-ajax
+      url="/menu"
+      handle-as="json"
+      last-response="{{menuItems}}"
+      on-response="generateProductList"
+      auto
+    ></iron-ajax>
+
+    <iron-ajax
+      id="AddOrder"
+      url="/add-order"
+      method="POST"
+      content-type="application/json"
+      handle-as="json"
+      on-response="handleAddOrderResponse"
+      on-error="handleAddOrderError"
+    ></iron-ajax>
+
+    <label for="product">Product</label>
+    <select id="product" on-change="productChanged"></select>
+
+    <label for="productSize">Size</label>
+    <select id="productSize" on-change="sizeChanged"></select>
+
+    <label for="quantity">Quantity</label>
+    <input id="quantity" type="number" value="{{quantity::change}}" min="1" max="999">
+
+    <div>
+      Price: $<b>[[productPrice]]</b>
+      <br>
+      Quantity: <b>[[quantity]]</b>
+      <br>
+      Total: $<b>[[totalPrice]]</b>
+    </div>
+
+    <paper-button raised class="green" on-tap="submitOrder">
+      <iron-icon icon="add"></iron-icon>
+      Add Order
+    </paper-button>
+
+  </template>
+
+  <script src="shop-order-adding.js"></script>
+</dom-module>

@@ -1,0 +1,17 @@
+<dom-module id="shop-order">
+  <style>:host{display:block}
+</style>
+  <template>
+
+    <iron-ajax url="/orders" handle-as="json" last-response="{{orders}}" on-response="handleOrdersResponse" auto=""></iron-ajax>
+
+    <iron-list items="[[orders]]" scroll-target="document">
+      <template>
+        <shop-order-item order="[[item]]" total-sales="{{totalSales}}"></shop-order-item>
+      </template>
+    </iron-list>
+
+  </template>
+
+  <script>(function(){Polymer({is:"shop-order",properties:{totalSales:{type:Number,notify:!0},orders:{type:Array,notify:!0}},handleOrdersResponse:function(){this.orders.reverse()}})}).call(this);</script>
+</dom-module>

@@ -1,0 +1,22 @@
+<dom-module id="shop-order">
+  <link rel="stylesheet" href="shop-order.css" />
+  <template>
+
+    <iron-ajax
+      url="/orders"
+      handle-as="json"
+      last-response="{{orders}}"
+      on-response="handleOrdersResponse"
+      auto
+    ></iron-ajax>
+
+    <iron-list items="[[orders]]" scroll-target="document">
+      <template>
+        <shop-order-item order="[[item]]" total-sales="{{totalSales}}"></shop-order-item>
+      </template>
+    </iron-list>
+
+  </template>
+
+  <script src="shop-order.js"></script>
+</dom-module>

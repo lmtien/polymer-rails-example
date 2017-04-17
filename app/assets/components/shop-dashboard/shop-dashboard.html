@@ -1,0 +1,27 @@
+<dom-module id="shop-dashboard">
+  <link rel="stylesheet" href="shop-dashboard.css" />
+
+  <template>
+
+    <paper-scroll-header-panel condenses header-height="256" condensed-header-height="64">
+      <paper-toolbar class="tall">
+        <div class="spacer"></div>
+
+        <div class="middle">
+          <shop-order-adding total-sales="{{totalSales}}" orders="{{orders}}"></shop-order-adding>
+        </div>
+
+        <div class="bottom title">
+          <div><strong>Total sales: $[[_fixTwoDigit(totalSales)]]</strong></div>
+        </div>
+      </paper-toolbar>
+
+      <div class="content">
+        <shop-order total-sales="{{totalSales}}" orders="{{orders}}"></shop-order>
+      </div>
+    </paper-scroll-header-panel>
+
+  </template>
+
+  <script src="shop-dashboard.js"></script>
+</dom-module>

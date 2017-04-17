@@ -1,0 +1,20 @@
+<dom-module id="shop-order-item">
+  <link rel="stylesheet" href="shop-order-item.css" />
+
+  <template>
+
+    <div>
+      <div class="group-item">
+        <span><strong>[[order.shop_menu.product.name]]</strong></span>
+        <span class="secondary">
+          [[order.shop_menu.product_size.name]] x <i>[[order.quantity]]</i>
+        </span>
+        <div class="spacer"></div>
+        <span>$[[_addTotalSales(order.price)]]</span>
+      </div>
+    </div>
+
+  </template>
+
+  <script src="shop-order-item.js"></script>
+</dom-module>

@@ -1,0 +1,36 @@
+<dom-module id="shop-order-adding">
+  <style>:host{display:block}#quantity{width:40px}paper-button.green{background-color:var(--paper-green-500);color:white;margin:0;margin-top:5px;padding:7px}
+</style>
+
+  <template>
+
+    <iron-ajax url="/menu" handle-as="json" last-response="{{menuItems}}" on-response="generateProductList" auto=""></iron-ajax>
+
+    <iron-ajax id="AddOrder" url="/add-order" method="POST" content-type="application/json" handle-as="json" on-response="handleAddOrderResponse" on-error="handleAddOrderError"></iron-ajax>
+
+    <label for="product">Product</label>
+    <select id="product" on-change="productChanged"></select>
+
+    <label for="productSize">Size</label>
+    <select id="productSize" on-change="sizeChanged"></select>
+
+    <label for="quantity">Quantity</label>
+    <input id="quantity" type="number" value="{{quantity::change}}" min="1" max="999">
+
+    <div>
+      Price: $<b>[[productPrice]]</b>
+      <br>
+      Quantity: <b>[[quantity]]</b>
+      <br>
+      Total: $<b>[[totalPrice]]</b>
+    </div>
+
+    <paper-button raised="" class="green" on-tap="submitOrder">
+      <iron-icon icon="add"></iron-icon>
+      Add Order
+    </paper-button>
+
+  </template>
+
+  <script>(function(){Polymer({is:"shop-order-adding",properties:{orders:{type:Array,notify:!0},totalSales:{type:Number,notify:!0},productPrice:{type:Number,value:0,observer:"_calTotalPrice"},quantity:{type:Number,value:1,observer:"_calTotalPrice"}},generateProductList:function(){var t,e;t={},this.menuItems.forEach(function(e){var r;return r=new Array,t.hasOwnProperty(e.product.category.name)&&(r=t[e.product.category.name]),r.push(e),t[e.product.category.name]=r}),e=[],Object.keys(t).forEach(function(r){var i;return e.push('<optgroup label="'+r+'">'),i=new Set,t[r].forEach(function(t){if(!i.has(t.product.name))return i.add(t.product.name),e.push('<option value="'+t.product.id+'">'+t.product.name+"</option>")}),e.push("</optgroup>")}),this.$.product.innerHTML=e.join(""),this.$.product.selectedIndex=-1},productChanged:function(t){var e,r;e=t.target.value,r=[],this.menuItems.forEach(function(t){var i;if(t.product.id==e&&(i=new Set,!i.has(t.product_size.name)))return i.add(t.product_size.name),r.push('<option value="'+t.product_size.id+'">'+t.product_size.name+"</option>")}),this.$.productSize.innerHTML=r.join(""),this.$.productSize.selectedIndex=-1,this.productPrice=0},sizeChanged:function(t){var e,r,i,o;i=this.$.product[this.$.product.selectedIndex].value,o=t.target.value,e=0,r=0,this.menuItems.forEach(function(t){t.product.id==i&&t.product_size.id==o&&(e=t.price,r=t.id)}),this.productPrice=e,this.menuId=r},submitOrder:function(){if(this.totalPrice<=0)return void alert("Please choose a product and its size.");this.$.AddOrder.body={authenticity_token:AUTH_TOKEN,order:{shop_menu_id:this.menuId,quantity:this.quantity,price:this.totalPrice}},this.$.AddOrder.generateRequest()},handleAddOrderResponse:function(t){t.detail.__data__.response&&(this.unshift("orders",t.detail.__data__.response[0]),this.totalSales=0)},handleAddOrderError:function(t){alert(t.detail.error.message)},_calTotalPrice:function(){return this.totalPrice=(this.productPrice*this.quantity).toFixed(2)}})}).call(this);</script>
+</dom-module>

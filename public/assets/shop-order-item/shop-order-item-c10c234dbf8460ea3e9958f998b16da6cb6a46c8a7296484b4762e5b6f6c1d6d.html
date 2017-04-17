@@ -1,0 +1,21 @@
+<dom-module id="shop-order-item">
+  <style>:host{display:block}.group-item{padding:15px 20px;background-color:white;font-size:15px}.group-item{@apply (--layout-horizontal);border:1px solid #ddd}.secondary{color:gray;margin-left:10px}.spacer{@apply (--layout-flex)}
+</style>
+
+  <template>
+
+    <div>
+      <div class="group-item">
+        <span><strong>[[order.shop_menu.product.name]]</strong></span>
+        <span class="secondary">
+          [[order.shop_menu.product_size.name]] x <i>[[order.quantity]]</i>
+        </span>
+        <div class="spacer"></div>
+        <span>$[[_addTotalSales(order.price)]]</span>
+      </div>
+    </div>
+
+  </template>
+
+  <script>(function(){Polymer({is:"shop-order-item",properties:{totalSales:{type:Number,notify:!0}},_addTotalSales:function(t){return this.totalSales=this.totalSales+t,t}})}).call(this);</script>
+</dom-module>
