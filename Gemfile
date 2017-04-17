@@ -43,3 +43,9 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  # Auto generate data for testing purpose
+  gem 'factory_girl_rails'
+  # Clean database after tes
+  gem 'database_cleaner'
+end
