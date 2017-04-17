@@ -1,6 +1,7 @@
 <dom-module id="shop-order">
   <style>:host{display:block}
 </style>
+
   <template>
 
     <iron-ajax url="/orders" handle-as="json" last-response="{{orders}}" on-response="handleOrdersResponse" auto=""></iron-ajax>

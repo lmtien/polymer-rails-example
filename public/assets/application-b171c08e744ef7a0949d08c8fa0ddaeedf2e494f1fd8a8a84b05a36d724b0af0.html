@@ -15464,7 +15464,7 @@ be used as the label of the toolbar via `aria-labelledby`.
       <div class="group-item">
         <span><strong>[[order.shop_menu.product.name]]</strong></span>
         <span class="secondary">
-          [[order.shop_menu.product_size.name]] x <i>[[order.quantity]]</i>
+          [[order.shop_menu.product_size.name]] <i>x [[order.quantity]]</i>
         </span>
         <div class="spacer"></div>
         <span>$[[_addTotalSales(order.price)]]</span>
@@ -15506,6 +15506,7 @@ be used as the label of the toolbar via `aria-labelledby`.
 <dom-module id="shop-order">
   <style>:host{display:block}
 </style>
+
   <template>
 
     <iron-ajax url="/orders" handle-as="json" last-response="{{orders}}" on-response="handleOrdersResponse" auto=""></iron-ajax>
