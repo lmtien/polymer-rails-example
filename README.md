@@ -1,8 +1,9 @@
-# Coffee Shop Demo
-The demo page is using [polymer](http://polymer-project.org/) to interact with web-server which is base on RoRs.
+# Polymer Rails Example
+The demo page is using [polymer](http://polymer-project.org/) to interact with web-server which is base on RoRs. This example will simulate the "order" process of a simple coffee shop.
+
 LIVE DEMO: [https://coffee-shop-polymer.herokuapp.com/](https://coffee-shop-polymer.herokuapp.com/)
 
-#### Usage
+### Usage
 
 After downloading, then execute:
 
@@ -15,8 +16,9 @@ Create database and initial data for the shop:
 * All initial data can be found in `db\seeds.rb`. You can either add or modify the data in there.
 * Polymer's elements are located in `app\assets\components\`
 
-#### Test
+### Test
 Tests can be found in `spec\models\` and `spec\controllers\`
+
 Run all with:
 
     $ rspec
